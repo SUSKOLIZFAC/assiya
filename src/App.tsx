@@ -91,18 +91,18 @@ export default function App() {
   }, [isMessageOpen]);
 
   return (
-    <main className="relative min-h-dvh w-full overflow-hidden bg-[#FFF7F9] text-[#4A1525] flex flex-col justify-between">
+    <main className="relative min-h-screen min-h-dvh w-full overflow-hidden bg-[#FFF7F9] text-[#4A1525] flex flex-col justify-between">
       {/* Responsive Single-Image Floral Backdrop (9:16 Portrait on Mobile, 16:9 on Desktop) */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
         {!imageError ? (
-          <picture>
+          <picture className="block h-full w-full">
             <source media="(min-width: 768px)" srcSet={DESKTOP_IMAGE_PATH} />
             <img
               src={MOBILE_IMAGE_PATH}
               alt="Blush pink, crimson red, and white garden roses beside sunlit sheer white curtains"
               referrerPolicy="no-referrer"
               onError={() => setImageError(true)}
-              className="h-full w-full object-cover object-top md:object-center animate-gentle-drift select-none"
+              className="block h-full w-full object-cover object-top md:object-center animate-gentle-drift select-none"
             />
           </picture>
         ) : (
