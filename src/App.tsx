@@ -242,7 +242,7 @@ export default function App() {
             }}
             className="font-display italic text-[clamp(1.25rem,5vw,1.85rem)] leading-[1.35] text-[#7D3B4D] max-w-md mb-6 sm:mb-8 text-balance"
           >
-            There&apos;s something on my mind I&apos;ve been wanting to say to you.
+            u need to watch the reels i send u before u open the link
           </motion.p>
 
           {/* Full-Width Thumb-Zone CTA on Mobile, Auto-Width on Desktop */}
