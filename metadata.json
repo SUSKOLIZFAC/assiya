@@ -1,6 +1,6 @@
 {
   "name": "For Assia",
-  "description": "An animated twilight invitation page for Assia.",
+  "description": "There's something on my mind I've been wanting to say to you.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -9,6 +9,7 @@ import { Heart, RotateCcw, X } from 'lucide-react';
 
 const MOBILE_IMAGE_PATH = '/src/assets/images/assia_mobile_roses_portrait_1794950189141.jpg';
 const DESKTOP_IMAGE_PATH = '/src/assets/images/assia_pink_red_roses_1794950044166.jpg';
+const EYES_IMAGE_PATH = '/assets/aistudio/921070277_1504707754937080_5661087450404992997_n_8126ffbf.jpg';
 const NAME_LETTERS = ['A', 's', 's', 'i', 'a'];
 
 interface FlyingHeart {
@@ -72,6 +73,7 @@ export default function App() {
   const prefersReducedMotion = useReducedMotion();
   const [revealKey, setRevealKey] = useState(0);
   const [imageError, setImageError] = useState(false);
+  const [eyesImageError, setEyesImageError] = useState(false);
   const [isMessageOpen, setIsMessageOpen] = useState(false);
 
   const handleReplay = () => {
@@ -325,33 +327,66 @@ export default function App() {
                 }
                 transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
                 onClick={(event) => event.stopPropagation()}
-                className="relative w-full rounded-t-3xl sm:rounded-2xl bg-white border-t sm:border border-[#F5D0DA] px-6 pt-4 pb-[max(1.75rem,env(safe-area-inset-bottom))] sm:p-8 shadow-[0_-16px_50px_-10px_rgba(159,18,57,0.28)] sm:shadow-[0_24px_60px_-15px_rgba(159,18,57,0.28)]"
+                className="relative w-full max-h-[90dvh] overflow-y-auto rounded-t-3xl sm:rounded-2xl bg-white border-t sm:border border-[#F5D0DA] px-6 pt-4 pb-[max(1.75rem,env(safe-area-inset-bottom))] sm:p-7 shadow-[0_-16px_50px_-10px_rgba(159,18,57,0.28)] sm:shadow-[0_24px_60px_-15px_rgba(159,18,57,0.28)]"
               >
                 {/* Mobile Sheet Drag Indicator */}
                 <div
-                  className="w-10 h-1.5 bg-[#F3C6D3] rounded-full mx-auto mb-5 sm:hidden"
+                  className="w-10 h-1.5 bg-[#F3C6D3] rounded-full mx-auto mb-3 sm:hidden"
                   aria-hidden="true"
                 />
 
-                <button
-                  type="button"
-                  onClick={() => setIsMessageOpen(false)}
-                  aria-label="Close message"
-                  className="absolute top-4 right-4 inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-xl text-[#7D3B4D] hover:text-[#4A1525] hover:bg-[#FFF1F5] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E11D48]"
+                {/* Modal Header */}
+                <div className="flex items-center justify-between gap-4 mb-4">
+                  <p className="text-xs font-medium tracking-wide text-[#E11D48]">
+                    For Assia
+                  </p>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsMessageOpen(false)}
+                    aria-label="Close message"
+                    className="-mr-2 inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-xl text-[#7D3B4D] hover:text-[#4A1525] hover:bg-[#FFF1F5] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E11D48]"
+                  >
+                    <X className="w-5 h-5 sm:w-4 sm:h-4" aria-hidden="true" />
+                  </button>
+                </div>
+
+                {/* Intimate Framed Close-Up of Her Eyes (rotated horizontal & edge-cropped) */}
+                <motion.div
+                  initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.45, delay: prefersReducedMotion ? 0 : 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-[#241317] ring-1 ring-[#F5D0DA] shadow-[0_14px_32px_-12px_rgba(74,21,37,0.35)] mb-5"
                 >
-                  <X className="w-5 h-5 sm:w-4 sm:h-4" aria-hidden="true" />
-                </button>
+                  {!eyesImageError ? (
+                    <img
+                      src={EYES_IMAGE_PATH}
+                      alt="Close-up photo of Assia's eyes"
+                      referrerPolicy="no-referrer"
+                      onError={() => setEyesImageError(true)}
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 scale-[1.18] max-w-none w-[56.25%] h-[177.78%] object-cover select-none"
+                    />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-[#FDE2E8] to-[#FFF1F5] text-[#9F1239]">
+                      <Heart className="w-8 h-8 fill-[#E11D48]/20 text-[#E11D48]" aria-hidden="true" />
+                    </div>
+                  )}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-[#4A1525]/25 via-transparent to-[#4A1525]/10 pointer-events-none"
+                    aria-hidden="true"
+                  />
+                </motion.div>
 
-                <p className="text-xs font-medium tracking-wide text-[#E11D48] mb-3">
-                  For Assia
-                </p>
-
-                <p
+                {/* Sweet Compliment Message */}
+                <motion.p
                   id="assia-popout-message"
-                  className="font-display italic font-semibold text-[clamp(1.9rem,7vw,2.6rem)] leading-[1.2] text-[#4A1525] mb-7"
+                  initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: prefersReducedMotion ? 0 : 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  className="font-display italic font-semibold text-[clamp(1.6rem,6vw,2.15rem)] leading-[1.28] text-[#4A1525] text-balance mb-6"
                 >
-                  hhhhhh ada7ak m3ak sf ghayriha
-                </p>
+                  Ur eyes are soo gorgeous n9ad nssa lwa9t o ana kanchofihom ✨❤️
+                </motion.p>
 
                 <button
                   type="button"
